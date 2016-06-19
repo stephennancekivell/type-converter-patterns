@@ -1,5 +1,7 @@
 package implicitconverter
 
+import json._
+
 trait Reads[A] {
   def read(v: JsValue): Either[String,A]
 }

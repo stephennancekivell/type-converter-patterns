@@ -1,8 +1,9 @@
 package implicitconverter
 
 import StandardReads._
+import json._
 
-object Usage {
+object ReadsUsage {
 
   val data: Map[String, JsValue] = Map()
 

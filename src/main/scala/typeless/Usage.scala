@@ -1,16 +1,28 @@
 package typeless
 
-object Usage {
+import json._
 
-	def formatForSolr(x: Any): String = {
-		x match {
-			case i: Int => i.toString
-			case str: String => str
-			case SeqOfString(xs) => xs.mkString(",")
-			case _ => throw new RuntimeException("surprise!")
-		}
+object JsonWriter {
+
+	def toJson(value: Any): JsValue = value match {
+		case v: String => JsString(v)
+		case v: Int => JsNumber(v.toDouble)
+		case v: Map[String,Any] =>
+			JsObject(
+				v.mapValues(toJson))
 	}
-
 }
 
-case class SeqOfString(xs: Seq[String])
+object Usage {
+
+  case class Person(name: String, age: Int)
+
+  def write(p: Person): JsValue = {
+    JsonWriter.toJson(
+      Map(
+        "name" -> p.name,
+        "age" -> p.age
+      )
+    )
+  }
+}

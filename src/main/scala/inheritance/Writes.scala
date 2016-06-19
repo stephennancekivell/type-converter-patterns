@@ -22,14 +22,3 @@ case class JsonWritableObject(obj: Map[String,JsonWritable]) extends JsonWritabl
       obj.mapValues(_.toJson())
     )
 }
-
-object JsonWritableImplicits {
-  implicit def toJson(a: String): JsonWritable =
-    JsonWritableString(a)
-
-  implicit def toJson(a: Int): JsonWritable =
-    JsonWritableInt(a)
-
-  implicit def toJson(a: Map[String, JsonWritable]): JsonWritable =
-    JsonWritableObject(a)
-}

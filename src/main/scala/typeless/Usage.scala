@@ -25,4 +25,6 @@ object Usage {
       )
     )
   }
+
+  val json = write(Person("Bill", 25))
 }

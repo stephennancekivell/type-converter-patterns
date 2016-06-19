@@ -5,27 +5,17 @@ import json._
 
 object WritesUsage {
 
-  implicit val locationWrites = new Writes[Location] {
-    def write(a: Location) = JsObject(
-      Map(
-        "lat" -> a.latitude,
-        "lng" -> a.longitude
-      )
-    )
-  }
-
-  case class Person(name: String, age: Int, location: Location)
+  case class Person(name: String, age: Int)
 
   val personWrites = new Writes[Person] {
     def write(a: Person) = JsObject(
       Map(
         "name" -> a.name,
-        "age" -> a.age,
-        "location" -> a.location
+        "age" -> a.age
       )
     )
   }
 
+  val json = personWrites.write(Person("Bill", 25))
 
-  case class Location(latitude: Double, longitude: Double)
 }

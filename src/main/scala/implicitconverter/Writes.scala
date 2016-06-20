@@ -19,6 +19,10 @@ object StandardWrites {
     def write(a: Double) = JsNumber(a)
   }
 
+  implicit val mapWrites = new Writes[Map[String,JsValue]] {
+    def write(a: Map[String,JsValue]) = JsObject(a)
+  }
+
 	implicit def toJson[A](a: A)(implicit writer: Writes[A]): JsValue =
 		writer.write(a)
 }
